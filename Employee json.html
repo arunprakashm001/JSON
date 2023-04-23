@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var Employee={
+            "Employee01":{
+                "Name":"Vicky",
+                "Age":43,
+                "Position":"Technician level-01",
+                "WorkingHours":"9:00 Hours",
+                "Salary":10000
+            },
+            "Employee02":{
+                "Name":"Dhanabal",
+                "Age":36,
+                "Position":"Technician level-02",
+                "WorkingHours":"8:00 Hours",
+                "Salary":16000
+            },
+            "Employee03":{
+                "Name":"Sanakiyan",
+                "Age":57,
+                "Position":"Supervisor",
+                "WorkingHours":"7:30 Hours",
+                "Salary":21000
+            }
+        }
+        console.log(Employee);
+
+        var key=Object.keys(Employee);
+        // console.log(key);
+
+        for(i=0; i<key.length; i++){
+            var get = key[i]
+            console.log(get);
+
+            var val = Object.values(Employee[key[i]]);
+            console.log(val);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var supermarket={
+            "customer01":{
+                "pen":30,
+                "paper":10,
+                "chocolate":55,
+                "oil":78,
+                "rice":290,
+                "cooldrinks":87
+            },
+            "customer02":{
+                "pen":45,
+                "paper":20,
+                "chocolate":30,
+                "oil":100,
+                "rice":220,
+                "cooldrinks":60
+            },
+        }
+        console.log(supermarket);
+
+        var key = Object.keys(supermarket);
+        // console.log(key);
+
+        // var val=Object.values(supermarket);
+        // console.log(val);
+
+        for(i=0; i<key.length; i++){
+            var getkey=key[i];
+            console.log(getkey)
+            var val = Object.values(supermarket[key[i]])
+            console.log(val);
+            var total=0;
+            for(j=0; j<val.length; j++){
+              total+=val[j]
+            }
+            console.log(total);
+            // val.total=total;
+            // supermarket[total]=total;
+            
+            
+        }
+        
+
+    </script>
+</body>
+</html>

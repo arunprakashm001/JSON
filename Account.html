@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var Banking={
+            "Acc01":{
+                "Name":"Suresh",
+                "Age":19,
+                "Acc.No":139300282,
+                "Balance":2000
+            },
+            "Acc02":{
+                "Name":"Rajesh",
+                "Age":20,
+                "Acc.No":992722292,
+                "Balance":7000
+            },
+            "Acc03":{
+                "Name":"Dinesh",
+                "Age":18,
+                "Acc.No":8886700432,
+                "Balance":3590       
+            },
+            "Acc04":{
+                "Name":"Ganesh",
+                "Age":16,
+                "Acc.No":28362922,
+                "Balance":3269
+            },
+            "Acc05":{
+                "Name":"Viknesh",
+                "Age":33,
+                "Acc.No":28339001,
+                "Balance":8341
+            }
+        }
+
+        var key=Object.keys(Banking);
+        // console.log(key);
+
+        // var val=Object.values(Banking);
+        // console.log(val);
+
+        for(i=0; i<key.length; i++){
+            var get = key[i];
+            console.log(get);
+           
+             var test=Object.values(Banking[key[i]]);
+             console.log(test);
+        }
+
+
+
+
+    </script>
+</body>
+</html>

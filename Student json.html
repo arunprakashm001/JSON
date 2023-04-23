@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var student={
+            "student1":{
+                "Name":"Suresh",
+                "Age":19,
+                "RollNo":"22VHM71",
+                "Marks":[89,50,53,45,90]
+            },
+            "student2":{
+                "Name":"Rajesh",
+                "Age":20,
+                "RollNo":"19MHA21",
+                "Marks":[77,72,90,85,94]
+            },
+            "student3":{
+                "Name":"Dinesh",
+                "Age":18,
+                "RollNo":"20CHY32",
+                "Marks":[92,85,90,76,49]
+            }
+        }
+        console.log(student);
+        var key = Object.keys(student);
+        console.log(key);
+
+        var val = Object.values(student);
+        console.log(val);
+
+        for(i=0; i<val.length; i++){
+            var get = val[i].Marks;
+            console.log(get);
+            var total=0;
+            for(j=0; j<get.length; j++){
+                total += get[j];
+            }
+            console.log(total);
+            val[i].total=total;
+            
+            var gettotal=total;
+            var avg = gettotal/5;
+            console.log(avg);
+            val[i].Average=avg;
+            if(gettotal>=400 && gettotal<=500){
+                val[i].grade="Grade-A";
+            }
+            else if(gettotal>=300 && gettotal<=399){
+                val[i].grade="Grade-B";
+            }
+            else if(gettotal>=200 && gettotal<=299){
+                val[i].grade="Grade-c";
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

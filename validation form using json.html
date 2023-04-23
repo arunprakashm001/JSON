@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="color: brown; text-transform: uppercase;">Employee Login</h1>
+    <form action="" id="faccess">
+        <div>
+            Employee.Name: <input type="text" id="name">
+            <div id="nameerrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.ID: <input type="text" id="empid">
+            <div id="empiderrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Gender: <br>
+            <input type="radio" name="gender" id="male" value="Male"> Male
+            <input type="radio" name="gender" id="female" value="Female"> Female
+            <input type="radio" name="gender" id="others" value="Others"> Others
+            <div id="gendererrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Age: <input type="number" id="age">
+            <div id="ageerrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Shifts: <br>
+            <input type="radio" name="shifts" id="frst" value="FirstShift"> First Shift
+            <input type="radio" name="shifts" id="sec" value="SecondShift"> Second Shift
+            <input type="radio" name="shifts" id="tri" value="ThirdShift"> Third Shift
+            <div id="shiftserrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Email: <input type="email" id="mail">
+            <div id="mailerrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Address: <textarea  id="address"></textarea>
+            <div id="addresserrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Employee.Skills: <br>
+            <input type="checkbox" name="skills" id="html" value="HTML"> HTML
+            <input type="checkbox" name="skills" id="css" value="CSS"> CSS
+            <input type="checkbox" name="skills" id="js" value="Javascript"> Javascript
+            <input type="checkbox" name="skills" id="java" value="Java"> Java
+            <input type="checkbox" name="skills" id="php" value="PHP"> php
+            <input type="checkbox" name="skills" id="mysql" value="MySQL"> MySQL
+    
+            <div id="skillserrordiv" style="color: red;"></div>
+        </div>
+        <div>
+            Select your weekly holiday : <br>
+            <select id="twowheeler" name="holiday">
+                <option value="select" name="day">--select--</option>
+                <option value="Sunday" name="day">Sunday</option>
+                <option value="Monday" name="day">Monday</option>
+                <option value="Tuesday" name="day">Tuesday</option>
+                <option value="Wednesday" name="day">Wednesday</option>
+                <option value="Thursday"name="day">Thursday</option>
+                <option value="Friday" name="day">Friday</option>
+                <option value="Saturday" name="day">Saturday</option>
+            </select>
+            <div id="holidayerrordiv" style="color: red;"></div>
+        </div>
+    </form>
+    <button onclick="submit()">SUBMIT</button>
+
+    <script>
+        function submit(){
+
+            var emperr={
+                "name":{
+                    "req":{"msg":"Name field will not be empty"},
+                    "minlen":{"msg":"Minimum 4 characters is required"},
+                    "maxlen":{"msg":"Maximum 25 characters only allowed"},
+                    "type":{"msg":"Alphabets only"}
+                },
+                "empid":{
+                    "req":{"msg":"Employee ID will not be empty"},
+                    "minlen":{"msg":"Minimum 6 characters is required"},
+                    "maxlen":{"msg":"Maximum 6 characters only allowed"},
+                    "type":{"msg":"Characters and Numbers only"}
+                },
+                "radio":{
+                    "req":{"msg":"Please select one"}
+                },
+                "age":{
+                    "req":{"msg":"Age field will not be empty"},
+                    "valid":{"msg":"Enter a valid age"},
+                    "type":{"msg":"Numbers Only"}
+                },
+                "mail":{
+                    "req":{"msg":"Enter your Email"},
+                    "minlen":{"msg":"Minum 15 characters required for a valid email"},
+                    "maxlen":{"msg":"Maximum 40 characters only allowed"},
+                    "valid":{"msg":"Enter a valid email"}
+                },
+                "address":{
+                    "req":{"msg":"This field will not be empty"},
+                    "type":{"msg":"A-Z,a-z,0-9, space and / only allowed"}
+                },
+                "skills":{
+                    "req":{"msg":"Please select your skills"}
+                },
+                "day":{
+                    "req":{"msg":"Please select your weekly holiday"}
+                }
+            }
+
+
+            var key=Object.keys(emperr);
+            // console.log(key);
+
+            var txtcheck = /^[A-Za-z\t]{4,25}$/;
+            var idcheck=/^[A-Za-z0-9]{6,6}$/;
+            var numcheck= /^[0-9]{1,2}$/;
+            var mailcheck=/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/; 
+            var addcheck= /^[A-Za-z0-9\t-\.\/\,]+$/;
+
+
+            var form=document.getElementById("faccess");
+            // console.log(form.length)
+            for(var i=0; i<form.length; i++){
+                var getform=form.elements[i]
+
+                var id_s=getform.id;
+
+                var name_s=getform.name;
+                // console.log(name_s);
+
+                for(var j=0; j<key.length; j++){
+                    var getkey = Object.keys(emperr[key[j]])
+                    // console.log(getkey)
+                    for(var k=0; k<getkey.length; k++){
+                        
+                        if(getform.type=="text"){
+                        if(getform.id=="name"){
+                        var txtvalues = getform.value;
+                        console.log(txtvalues);
+                        if(getkey[k]){
+                            if(txtvalues==""){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.name.req.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(txtvalues.length>0 && txtvalues.length<=3){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.name.minlen.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(txtvalues.length>25){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.name.maxlen.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(txtvalues.length>3 && txtvalues.length<24){
+                                if(txtvalues.match(txtcheck)){
+                                    document.getElementById(id_s+"errordiv").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(id_s+"errordiv").innerHTML=emperr.name.type.msg;
+                                }
+                            }
+                        }
+                    }
+                    else if(getform.id=="empid"){
+                    var txt01val = getform.value;
+                    console.log(txt01val);
+    
+                    if(getkey[k]){
+                    if(txt01val==""){
+                        document.getElementById(id_s+"errordiv").innerHTML=emperr.empid.req.msg;
+                    }
+                    }
+                    if(getkey[k]){
+                    if(txt01val.length>0 && txt01val.length<6 ){
+                       document.getElementById(id_s+"errordiv").innerHTML=emperr.empid.minlen.msg;
+                    }
+                   }
+                    if(getkey[k]){
+                    if(txt01val.length>6){
+                    document.getElementById(id_s+"errordiv").innerHTML=emperr.empid.maxlen.msg;
+                   }
+                  }
+
+                  if(getkey[k]){
+                  if(txt01val.length==6){
+                    if(txt01val.match(idcheck)){
+                        document.getElementById(id_s+"errordiv").innerHTML="";
+                    }
+                    else{
+                        document.getElementById(id_s+"errordiv").innerHTML=emperr.empid.valid.msg;
+                    }
+                  }
+                 }
+                }
+                }
+
+                if(getform.type=="radio"){
+                        var radios = document.getElementsByName(name_s);
+                        // console.log(radios);
+                        for(var l=0; l<radios.length; l++){
+                            if(getkey[k]){
+                                if(radios[l].checked){
+                                    var rval = radios[l].value;
+                                    document.getElementById(name_s+"errordiv").innerHTML="";
+                                    console.log(rval);
+                                    break;
+                                }
+                                else{
+                                    document.getElementById(name_s+"errordiv").innerHTML=emperr.radio.req.msg;
+                                }
+                            }
+                        }
+
+                    }
+                    
+                    if(getform.type=="number"){
+                        var numvalues = getform.value;
+                        console.log(numvalues);
+
+                        if(getkey[k]){
+                            if(numvalues==""){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.age.req.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(numvalues.length>=3){
+                                if(numvalues>100){
+                                    document.getElementById(id_s+"errordiv").innerHTML=emperr.age.valid.msg;
+                                }
+                            }
+                        }
+                        if(getkey[k]){
+                            if(numvalues.length>=1 && numvalues.length<=3 && numvalues<=100){
+                                if(numvalues.match(numcheck)){
+                                    document.getElementById(id_s+"errordiv").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(id_s+"errordiv").innerHTML=emperr.age.type.age;
+                                }
+                            }
+                        }
+
+                    }
+
+                    if(getform.type=="email"){
+                        var mailvalue = getform.value;
+                        console.log(mailvalue);
+
+                        if(getkey[k]){
+                            if(mailvalue==""){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.mail.req.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>0 && mailvalue.length<15){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.mail.minlen.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>40){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.mail.maxlen.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>=15 && mailvalue.length<=40){
+                                if(mailvalue.match(mailcheck)){
+                                    document.getElementById(id_s+"errordiv").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(id_s+"errordiv").innerHTML=emperr.mail.valid.msg;
+                                }
+                            }
+                        }
+                    }
+
+                    if(getform.type=="textarea"){
+                        var addvalue = getform.value;
+                        console.log(addvalue);
+                        if(getkey[k]){
+                            if(addvalue==""){
+                                document.getElementById(id_s+"errordiv").innerHTML=emperr.address.req.msg;
+                            }
+                        }
+
+                        if(getkey[k]){
+                            if(addvalue.length>0){
+                                if(addvalue.match(addcheck)){
+                                    document.getElementById(id_s+"errordiv").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(id_s+"errordiv").innerHTML=emperr.address.type.msg;
+                                }
+                            }
+                            
+                        }
+                    }
+
+                    if(getform.type=="checkbox"){
+                        var cbox = document.getElementsByName(name_s);
+                        var carray=[];
+                        var status=false;
+                        for(var m=0; m<cbox.length; m++){
+                            if(getkey[k]){
+                                if(cbox[m].checked){
+                                    status=true;
+                                    carray.push(cbox[m].value)
+                                    console.log(carray);
+                                }
+                                else{
+                                    if(status==true){
+                                        document.getElementById(name_s+"errordiv").innerHTML="";
+                                    }
+                                    else{
+                                        document.getElementById(name_s+"errordiv").innerHTML=emperr.skills.req.msg;
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+
+                    if(getform.name=="holiday"){
+                        var dropdown = document.getElementsByName("day");
+                        var frst = document.getElementsByName("day")[0].value;
+                        
+
+                        for(var n=0; n<dropdown.length; n++){
+                            if(getkey[k]){
+                                if(dropdown[n].selected){
+                                    // console.log("h1");
+                                    var dropval=dropdown[n].value;
+                                    console.log(dropval);
+
+                                    document.getElementById(name_s+"errordiv").innerHTML="";
+
+                                    // console.log("h2");
+                                }
+                                else{
+                                    if(frst==dropval){
+                                        // console.log("h3");
+                                        document.getElementById(name_s+"errordiv").innerHTML=emperr.day.req.msg;
+                                    }
+                                }
+                               
+                            }
+                        }
+
+                    }
+
+
+
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+        }
+
+
+    </script>
+</body>
+</html>

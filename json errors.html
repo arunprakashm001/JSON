@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="J15.css">
+</head>
+<body>
+    
+    <h2 style="color: blue;">STUDENT LOGIN</h2>
+    <div id="formdiv">
+    <form action="" id="faccess">
+        <div>
+            <span style="color:orange;">Name:</span>
+            <input type="text" id="name">
+            <div id="nameerror" style="color: red"></div>
+        </div>
+        <div>
+            <span style="color:orange;">Age:</span> <input type="number" id="age">
+            <div id="ageerror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;">RollNumber:</span> <input type="text" id="rollno">
+            <div id="rollnoerror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;">Email:</span> <input type="email" id="mail">
+            <div id="mailerror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;">Address:</span> <textarea id="add"></textarea>
+            <div id="adderror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;" >Blocks:</span> <br>
+            <input type="radio" id="ablc" name="blc" class="blc" value="A-Block"> A-Block
+            <input type="radio" id="bblc" name="blc" class="blc" value="B-Block"> B-Block
+            <input type="radio" id="cblc" name="blc" class="blc" value="C-Block"> C-Block
+            <div id="blcerror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;">Sports:</span> <br>
+            <input type="checkbox" id="crick" name="sports" value="Cricket"> Cricket
+            <input type="checkbox" id="ttnes" name="sports" value="Tabletennis">Tabletennis
+            <input type="checkbox" id="fball" name="sports" value="FootBall"> FootBall
+            <input type="checkbox" id="vball" name="sports" value="VolleyBall"> VolleyBall
+            <div id="sportserror" style="color: red;"></div>
+        </div>
+        <div>
+            <span style="color: orange;">Class staff name:</span>  <br>
+            <select name="teachers" id="staff">
+                <option value="select"  name="stf">---Select---</option>
+                <option value="Mr.K.Vikneshwaran"  name="stf">Mr.K.Vikneshwaran</option>
+                <option value="Mr.M.Kathiravan" name="stf">Mr.M.Kathiravan</option>
+                <option value="Ms.S.Sangunthala" name="stf">Ms.S.Sangunthala</option>
+                <option value="Ms.A.Kalaiyarasi"  name="stf">Ms.A.Kalaiyarasi</option>
+                <option value="Mr.N.Muthukumar"  name="stf">Mr.N.Muthukumar</option>
+                <option value="Ms.A.DeviPriya"  name="stf">Ms.A.Devi priya</option>   
+            </select>
+            <div id="teacherserror" style="color: red;"></div>
+           
+        </div>
+    </form>
+    <button onclick="submit()">SUBMIT</button>
+    </div>
+    
+
+    
+    <script>
+        function submit(){
+            
+
+            var errormsg = {
+                
+                    "name":{
+                        "required":{"msg":"This field will not be empty"},
+                        "minlength":{"msg":"Minimum 4 characters is required"},
+                        "maxlength":{"msg":"Maximum 25 characters only allowed"},
+                        "inputtype":{"msg":"Characters only"}
+                    },
+                    "age":{
+                        "required":{"msg":"This field will not be empty"},
+                        "valid":{"msg":"Enter a valid age"},
+                        "inputtype":{"msg":"Numbers Only"}
+                    },
+                    "rollno":{
+                        "required":{"msg":"This field will not be empty"},
+                        "minlength":{"msg":"Valid rollno contain 6 letters"},
+                        "maxlength":{"msg":"Maximum length is 6"},
+                        "valid":{"msg":"Enter valid roll number"}
+                    },
+                    "mail":{
+                        "required":{"msg":"This field will not be empty"},
+                        "minlength":{"msg":"Minum 15 characters required for a valid email"},
+                        "maxlength":{"msg":"Maximum 40 characters only allowed"},
+                        "valid":{"msg":"Enter a valid email"}
+                    },
+                    "add":{
+                        "required":{"msg":"This field will not be empty"},
+                        "inputtype":{"msg":"A-Z,a-z,0-9, space and / only allowed"}
+                    },
+                    "blc":{
+                        "required":{"msg":"Please select your studying block"}
+                    },
+                    "sports":{
+                        "required":{"msg":"Please select your fav sports"}
+                    },
+                    "stf":{
+                        "required":{"msg":"Please select your class teacher name"}
+                    }
+                    
+                    
+                    
+            }
+                
+            
+            // console.log(errormsg);
+
+            var key=Object.keys(errormsg)
+            // console.log(key);
+
+            var txt01check = /^[A-Za-z\t]{4,25}$/;
+            var num01check= /^[0-9]{1,2}$/; 
+            var addcheck= /^[A-Za-z0-9\t-\.\/\,]+$/;
+            var mailcheck=/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
+            var rollnocheck=/^[A-Za-z0-9]{6,6}$/;
+
+            var form = document.getElementById("faccess");
+            // console.log(form);
+
+
+            for(var i=0; i<form.length; i++){
+                var getform=form.elements[i];
+                var ids = getform.id;
+                // console.log(ids);
+                var names = getform.name;
+                //console.log(names)
+
+                for(j=0; j<key.length; j++){
+                    var getkey = Object.keys(errormsg[key[j]])
+                    // console.log(getkey)
+
+                    for(k=0; k<getkey.length; k++){
+                       var error = getkey[k];
+                       console.log(error)
+
+                       if(getform.type=="text"){
+                        if(getform.id=="name"){
+                        var txtvalues = getform.value;
+                        console.log(txtvalues);
+                        if(getkey[k]){
+                            // console.log("0=>"+getkey[k])
+                            if(txtvalues==""){
+                                document.getElementById(ids+"error").innerHTML=errormsg.name.required.msg;
+                                // console.log("empty")
+                            }
+                        }
+                        if(getkey[k]){
+                            // console.log("1=>"+getkey[k])
+                            if(txtvalues.length>0 && txtvalues.length<=3){
+                                document.getElementById(ids+"error").innerHTML=errormsg.name.minlength.msg;
+                                console.log("lengthmin");
+                            }
+                        }
+                        if(getkey[k]){
+                            // console.log("2=>"+getkey[k])
+                            if(txtvalues.length>25){
+                                document.getElementById(ids+"error").innerHTML=errormsg.name.maxlength.msg;
+                                // console.log("lengthmax");
+                            }
+                        }
+                        if(getkey[k]){
+                            // console.log("3=>"+getkey[k])
+                            if(txtvalues.length>3 && txtvalues.length<24){
+                                if(txtvalues.match(txt01check)){
+                                    document.getElementById(ids+"error").innerHTML="";
+                                    // console.log("crct format");
+                                }
+                                else{
+                                    document.getElementById(ids+"error").innerHTML=errormsg.name.inputtype.msg;
+                                }
+                            }
+                        }
+                    }
+                    else if(getform.id=="rollno"){
+                    var txt01val = getform.value;
+                    console.log(txt01val);
+    
+                    if(getkey[k]){
+                    if(txt01val==""){
+                        document.getElementById(ids+"error").innerHTML=errormsg.rollno.required.msg;
+                    }
+                    }
+                    if(getkey[k]){
+                    if(txt01val.length>0 && txt01val.length<6 ){
+                       document.getElementById(ids+"error").innerHTML=errormsg.rollno.minlength.msg;
+                    }
+                   }
+                    if(getkey[k]){
+                    if(txt01val.length>6){
+                    document.getElementById(ids+"error").innerHTML=errormsg.rollno.maxlength.msg;
+                   }
+                  }
+
+                  if(getkey[k]){
+                  if(txt01val.length==6){
+                    if(txt01val.match(rollnocheck)){
+                        document.getElementById(ids+"error").innerHTML="";
+                    }
+                    else{
+                        document.getElementById(ids+"error").innerHTML=errormsg.rollno.valid.msg;
+                    }
+                  }
+                 }
+                }
+                }
+                       
+                       
+                    if(getform.type=="number"){
+                        var numvalues = getform.value;
+                        console.log(numvalues);
+
+                        if(getkey[k]){
+                            if(numvalues==""){
+                                document.getElementById(ids+"error").innerHTML=errormsg.age.required.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(numvalues.length>=3){
+                                if(numvalues>100){
+                                    document.getElementById(ids+"error").innerHTML=errormsg.age.valid.msg;
+                                }
+                            }
+                        }
+                        if(getkey[k]){
+                            if(numvalues.length>=1 && numvalues.length<=3 && numvalues<=100){
+                                if(numvalues.match(num01check)){
+                                    document.getElementById(ids+"error").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(ids+"error").innerHTML=errormsg.age.inputtype.age;
+                                }
+                            }
+                        }
+
+                    }
+
+                    if(getform.type=="email"){
+                        var mailvalue = getform.value;
+                        console.log(mailvalue);
+
+                        if(getkey[k]){
+                            if(mailvalue==""){
+                                document.getElementById(ids+"error").innerHTML=errormsg.mail.required.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>0 && mailvalue.length<15){
+                                document.getElementById(ids+"error").innerHTML=errormsg.mail.minlength.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>40){
+                                document.getElementById(ids+"error").innerHTML=errormsg.mail.maxlength.msg;
+                            }
+                        }
+                        if(getkey[k]){
+                            if(mailvalue.length>=15 && mailvalue.length<=40){
+                                if(mailvalue.match(mailcheck)){
+                                    document.getElementById(ids+"error").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(ids+"error").innerHTML=errormsg.mail.valid.msg;
+                                }
+                            }
+                        }
+
+
+                    }
+
+                    if(getform.type=="textarea"){
+                        var addvalue = getform.value;
+                        console.log(addvalue);
+                        if(getkey[k]){
+                            if(addvalue==""){
+                                document.getElementById(ids+"error").innerHTML=errormsg.add.required.msg;
+                            }
+                        }
+
+                        if(getkey[k]){
+                            if(addvalue.length>0){
+                                if(addvalue.match(addcheck)){
+                                    document.getElementById(ids+"error").innerHTML="";
+                                }
+                                else{
+                                    document.getElementById(ids+"error").innerHTML=errormsg.add.inputtype.msg;
+                                }
+                            }
+                            
+                        }
+                    }
+
+                    if(getform.type=="radio"){
+                        var radios = document.getElementsByName(names);
+                        // console.log(radios);
+                        for(var l=0; l<radios.length; l++){
+                            if(getkey[k]){
+                                if(radios[l].checked){
+                                    var rval = radios[l].value;
+                                    document.getElementById(names+"error").innerHTML="";
+                                    console.log(rval);
+                                    break;
+                                }
+                                else{
+                                    document.getElementById(names+"error").innerHTML=errormsg.blc.required.msg;
+                                }
+                            }
+                        }
+
+                    }
+
+                    if(getform.type=="checkbox"){
+                        var cbox = document.getElementsByName(names);
+                        var carray=[];
+                        var status=false
+                        for(var m=0; m<cbox.length; m++){
+                            if(getkey[k]){
+                                // console.log(getkey[k]);
+                                if(cbox[m].checked){
+                                    status=true;
+                                    carray.push(cbox[m].value)
+                                    console.log(carray);
+                                }
+                                else{
+                                    if(status==true){
+                                        document.getElementById(names+"error").innerHTML="";
+                                    }
+                                    else{
+                                        document.getElementById(names+"error").innerHTML=errormsg.sports.required.msg;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if(getform.name=="teachers"){
+                        var dropdown = document.getElementsByName("stf");
+                        // console.log(dropdown);
+                        var frst = document.getElementsByName("stf")[0].value;
+                        // console.log(frst)
+                        for(var n=0; n<dropdown.length; n++){
+                            if(getkey[k]){
+                                if(dropdown[n].selected){
+                                    var dget=dropdown[n].value;
+                                    document.getElementById(names+"error").innerHTML="";
+                                    console.log(dget)
+                                }
+                                else{
+                                    if(frst==dget){
+                                        document.getElementById(names+"error").innerHTML=errormsg.stf.required.msg;
+                                    }
+                                }
+                               
+                            }
+                        }
+
+                    }
+
+
+                 }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var student={
+            "student1":{
+                "Name":"Suresh",
+                "Age":19,
+                "RollNo":"22VHM71",
+                "Marks":[89,50,53,45,90 ]
+            },
+            "student2":{
+                "Name":"Rajesh",
+                "Age":20,
+                "RollNo":"19MHA21",
+                "Marks":[77,72,90,85,94]
+            },
+            "student3":{
+                "Name":"Dinesh",
+                "Age":18,
+                "RollNo":"20CHY32",
+                "Marks":[92,85,90,76,49]
+            }
+        }
+        console.log(student);
+        var key = Object.keys(student);
+        // console.log(key);
+       var val = Object.values(student);
+
+       
+
+        for(var j=0; j<val.length; j++){
+            var test1 = val[j].Marks;
+            console.log(test1);
+
+            var total=0;
+            for(k=0; k<test1.length; k++){
+                total+=test1[k];
+            }
+            val[j].total=total;
+            console.log(total)
+
+            var test2 = total;
+            var len = test1.length;
+
+            var average=test2/len;
+            val[j].average=average;
+            
+            if(test2>=400 && test2<=500){
+                val[j].grade="Grade-A";
+            }
+            else if(test2>=300 && test2<=399){
+                val[j].grade="Grade-B";
+            }
+            else if(test2>=200 && test2<=299){
+                val[j].grade="Grade-c";
+            }
+
+            }
+
+            for(var i=0; i<key.length; i++){
+            var getkey = key[i];
+            console.log(getkey);
+
+            var valget = Object.values(student[key[i]]);
+            console.log(valget);
+        }
+        
+        
+    </script>
+</body>
+</html>
